@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 const PICTURE_COUNT = 25;
 
 const Avatar = {
@@ -10,10 +11,7 @@ const Likes = {
   MAX: 200
 };
 
-const Comments = {
-  MIN: 0,
-  MAX: 30
-};
+const COMMENT_COUNT = 30;
 
 const COMMENTS_LINES = [
   'Всё отлично!',
@@ -49,16 +47,28 @@ const picture = (id) => ({
   url: `photos/${id}.jpg`,
   description: descriptions[getRandomInRange(0, descriptions.length - 1)],
   likes: getRandomInRange(Likes.MIN, Likes.MAX),
-  comments: getRandomInRange(Comments.MIN, Comments.MAX),
-  avatar: `img/avatar-${getRandomInRange(Avatar.MIN, Avatar.MAX)}.svg`,
-  message: COMMENTS_LINES[getRandomInRange(0, COMMENTS_LINES.length - 1)],
-  name: names[getRandomInRange(0, names.length - 1)]
+  comments: generateComments()
 });
 
 const addPictures = () => {
-  for (let i = 1; i < PICTURE_COUNT; i++) {
+  for (let i = 1; i <= PICTURE_COUNT; i++) {
     pictures.push(picture(i));
   }
 };
+
+
+const generateComments = () => {
+  const comments = [];
+  for (let i = 0; i <= getRandomInRange(0, COMMENT_COUNT); i++) {
+    comments.push({
+      id: i,
+      avatar: `img/avatar-${getRandomInRange(Avatar.MIN, Avatar.MAX)}.svg`,
+      message: COMMENTS_LINES[getRandomInRange(0, COMMENTS_LINES.length - 1)],
+      name: names[getRandomInRange(0, names.length - 1)]
+    });
+  }
+  return comments;
+};
+
 
 addPictures();
