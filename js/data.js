@@ -73,5 +73,5 @@ const createPictures = () => Array.from({length: PICTURE_COUNT}, (_, id) =>
   picture(id + 1));
 
 addPictures();
-console.log(pictures);
+
 export {createPictures};
