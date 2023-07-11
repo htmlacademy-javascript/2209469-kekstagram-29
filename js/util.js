@@ -1,3 +1,6 @@
 const getRandomInRange = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
-export {getRandomInRange};
+const onEscKeyDown = (evt) => evt.key === 'Escape';
+
+export { getRandomInRange };
+export { onEscKeyDown };

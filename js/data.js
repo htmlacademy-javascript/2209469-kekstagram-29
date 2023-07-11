@@ -74,4 +74,4 @@ const createPictures = () => Array.from({length: PICTURE_COUNT}, (_, id) =>
 
 addPictures();
 
-export {createPictures};
+export { createPictures };
