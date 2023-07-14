@@ -56,7 +56,7 @@ const addPictures = () => {
 };
 
 
-const generateComments = () => {
+function generateComments () {
   const comments = [];
   for (let i = 0; i <= getRandomInRange(0, COMMENT_COUNT); i++) {
     comments.push({
@@ -67,7 +67,7 @@ const generateComments = () => {
     });
   }
   return comments;
-};
+}
 
 const createPictures = () => Array.from({length: PICTURE_COUNT}, (_, id) =>
   picture(id + 1));
