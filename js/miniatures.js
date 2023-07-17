@@ -1,7 +1,9 @@
 import { showBigPicture } from './big-picture.js';
 
+
 const miniatureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const miniaturesCountainer = document.querySelector('.pictures');
+
 
 const createMiniature = (picture) => {
   const { url, description, likes, comments } = picture;
@@ -21,6 +23,7 @@ const createMiniature = (picture) => {
 
   return miniatureElement;
 };
+
 
 const renderMiniature = (pictures) => {
   const fragment = document.createDocumentFragment();
