@@ -1,4 +1,5 @@
 import { onEscKeyDown } from './util.js';
+import { resetScale } from './scale.js';
 
 
 const upload = document.querySelector('.img-upload');
@@ -12,6 +13,7 @@ const onCloseFromChenge = () => {
   document.body.classList.remove('mdoal-open');
   document.removeEventListener('keydown', onFormEscKeyDown);
   uploadCancel.removeEventListener('click', onCloseFromChenge);
+  resetScale();
   formUplad.reset();
   Pristine.reset();
 };
