@@ -1,5 +1,6 @@
 import { onEscKeyDown } from './util.js';
 import { resetScale } from './scale.js';
+import { resetSlider } from './effects.js';
 
 
 const upload = document.querySelector('.img-upload');
@@ -14,6 +15,7 @@ const onCloseFromChenge = () => {
   document.removeEventListener('keydown', onFormEscKeyDown);
   uploadCancel.removeEventListener('click', onCloseFromChenge);
   resetScale();
+  resetSlider();
   formUplad.reset();
   Pristine.reset();
 };
