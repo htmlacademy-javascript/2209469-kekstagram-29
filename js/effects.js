@@ -1,10 +1,3 @@
-const uploadForm = document.querySelector('.img-upload__form');
-const effectsList = uploadForm.querySelector('.effects__list');
-const picture = uploadForm.querySelector('.img-upload__preview img');
-const effectLevel = uploadForm.querySelector('.effect-level');
-const effectLevelValue = uploadForm.querySelector('.effect-level__value');
-const effectLevelSlider = uploadForm.querySelector('.effect-level__slider');
-
 const EFFECTS = {
   none: {
     name: 'none',
@@ -60,7 +53,17 @@ const EFFECTS = {
   }
 };
 
+
 const NORMAL_EFFECT = EFFECTS['none'];
+
+
+const uploadForm = document.querySelector('.img-upload__form');
+const effectsList = uploadForm.querySelector('.effects__list');
+const picture = uploadForm.querySelector('.img-upload__preview img');
+const effectLevel = uploadForm.querySelector('.effect-level');
+const effectLevelValue = uploadForm.querySelector('.effect-level__value');
+const effectLevelSlider = uploadForm.querySelector('.effect-level__slider');
+
 
 let selectedEffect = NORMAL_EFFECT;
 
@@ -84,12 +87,14 @@ const showSlider = () => {
   }
 };
 
+
 const onEffectsListClick = (evt) => {
   if (evt.target.type === 'radio') {
     selectedEffect = EFFECTS[evt.target.value];
     showSlider();
   }
 };
+
 
 noUiSlider.create((effectLevelSlider), {
   range: {
@@ -100,6 +105,7 @@ noUiSlider.create((effectLevelSlider), {
   start: NORMAL_EFFECT.max,
   content: 'lower',
 });
+
 
 const onEffectSliderShow = () => {
   picture.style.filter = 'none';
@@ -114,14 +120,18 @@ const onEffectSliderShow = () => {
   effectLevelValue.value = sliderEffectValue;
 };
 
+
 showSlider();
+
 
 effectsList.addEventListener('click', onEffectsListClick);
 effectLevelSlider.noUiSlider.on('update', onEffectSliderShow);
+
 
 const resetSlider = () => {
   selectedEffect = NORMAL_EFFECT;
   showSlider();
 };
+
 
 export { resetSlider };

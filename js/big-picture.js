@@ -80,7 +80,9 @@ const onCloseBigPictureClick = () => {
 
 
 const onPopupEscKeyDown = (evt) => {
-  if (onEscKeyDown(evt)) {
+  if (onEscKeyDown (evt) &&
+  !evt.target.classList.contains('social__footer-text')
+  ) {
     document.removeEventListener('keydown', onPopupEscKeyDown);
     commentsLoader.removeEventListener('click', onCommentsLoaderButtonClick);
 

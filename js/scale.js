@@ -1,14 +1,14 @@
+const SCALE_STEP = 25;
+const MIN_SCALE = 25;
+const MAX_SCALE = 100;
+const NORMAL_SCALE = 100;
+
+
 const uploadScale = document.querySelector('.img-upload');
 const scaleControlSmaller = uploadScale.querySelector('.scale__control--smaller');
 const scaleControlValue = uploadScale.querySelector('.scale__control--value');
 const scaleControlBigger = uploadScale.querySelector('.scale__control--bigger');
 const uploadImage = uploadScale.querySelector('.img-upload__preview img');
-
-
-const SCALE_STEP = 25;
-const MIN_SCALE = 25;
-const MAX_SCALE = 100;
-const NORMAL_SCALE = 100;
 
 
 const scaleImage = (value) => {
@@ -33,4 +33,4 @@ scaleControlBigger.addEventListener('click', onBiggerButtonClick);
 
 const resetScale = () => scaleImage(NORMAL_SCALE);
 
-export {resetScale};
+export { resetScale };
