@@ -12,7 +12,7 @@ const uploadImage = uploadScale.querySelector('.img-upload__preview img');
 
 
 const scaleImage = (value) => {
-  uploadImage.style.transform = `scale(${value / 100})`;
+  uploadImage.style.transform = `scale(${value / NORMAL_SCALE})`;
   scaleControlValue.value = `${value}%`;
 };
 
@@ -33,4 +33,4 @@ scaleControlBigger.addEventListener('click', onBiggerButtonClick);
 
 const resetScale = () => scaleImage(NORMAL_SCALE);
 
-export {resetScale};
+export { resetScale };

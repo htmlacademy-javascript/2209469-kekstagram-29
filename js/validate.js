@@ -1,5 +1,5 @@
-import {normalizeString} from './util.js';
-import {onCloseFromChenge} from './form-picture.js';
+import { normalizeString } from './util.js';
+import { onCloseFromChange } from './form-picture.js';
 
 const MAX_DESCRIPTION_LENGTH = 140;
 const MAX_HASHTAG = 5;
@@ -114,8 +114,8 @@ hashtagInputElement.addEventListener('input', onHashtagInput);
 const onFormSubmit = () => {
   submitBtnElement.addEventListener('click', (evt) => {
     evt.preventDefault();
-    onCloseFromChenge();
+    onCloseFromChange();
   });
 };
 
-export { onFormSubmit };
+export { onFormSubmit, pristine };
