@@ -27,11 +27,18 @@ const createMiniature = (picture) => {
 
 const renderMiniature = (pictures) => {
   const fragment = document.createDocumentFragment();
-  pictures.forEach((picture) => {
-    fragment.append(createMiniature(picture));
+  pictures.forEach((item) => {
+    fragment.append(createMiniature(item));
   });
 
   miniaturesCountainer.appendChild(fragment);
 };
 
-export { renderMiniature };
+const removeMiniature = () => {
+  const pictures = document.querySelectorAll('.picture');
+  if (pictures) {
+    pictures.forEach((picture) => picture.remove());
+  }
+};
+
+export { renderMiniature, removeMiniature };
