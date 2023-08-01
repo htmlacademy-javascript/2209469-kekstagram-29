@@ -108,7 +108,6 @@ const onHashtagInput = () => {
   }
 };
 
-
 hashtagInputElement.addEventListener('input', onHashtagInput);
 
 const onFormSubmit = () => {
