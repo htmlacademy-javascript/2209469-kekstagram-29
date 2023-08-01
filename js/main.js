@@ -1,6 +1,6 @@
 import './form-picture.js';
 import './messages.js';
-import {renderMiniature } from './miniatures.js';
+import { renderMiniature } from './miniatures.js';
 import { loadData } from './fetch.js';
 import './filters-button.js';
 import './push-photos.js';
