@@ -9,12 +9,14 @@ const fileUpload = upload.querySelector('#upload-file');
 const formUplad = upload.querySelector('.img-upload__form');
 const overlayUpload = upload.querySelector('.img-upload__overlay');
 const uploadCancel = upload.querySelector('#upload-cancel');
+const submitBtnElement = upload.querySelector('.img-upload__submit');
 
 const onCloseFromChange = () => {
   overlayUpload.classList.add('hidden');
   document.body.classList.remove('mdoal-open');
   document.removeEventListener('keydown', onFormEscKeyDown);
   uploadCancel.removeEventListener('click', onCloseFromChange);
+  submitBtnElement.disabled = false;
   formUplad.reset();
   pristine.reset();
   resetScale();
