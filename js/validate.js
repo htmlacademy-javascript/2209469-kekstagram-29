@@ -89,10 +89,7 @@ const hashtagValidated = (inputValue) => {
 
 const pristine = new Pristine(formElement, {
   classTo: 'img-upload__field-wrapper',
-  errorClass: 'field-validate--invalid',
-  successClass: 'field-validate__valid',
   errorTextParent: 'img-upload__field-wrapper',
-  errorTextTag: 'p',
   errorTextClass: 'form-error'
 });
 

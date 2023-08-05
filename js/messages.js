@@ -9,9 +9,7 @@ const formUpload = document.querySelector('.img-upload__form');
 
 const closeResultWindow = () => {
   const popup = document.querySelector('.error') || document.querySelector('.success');
-  if (popup) {
-    popup.remove();
-  }
+  popup.remove();
 };
 
 const onEscKeyDown = (evt) => {
@@ -22,11 +20,10 @@ const onEscKeyDown = (evt) => {
 };
 
 const onPopupClick = (evt) => {
-  const popup = document.querySelector('.error') || document.querySelector('.success');
-  if (popup && !evt.target.closest('.success__inner') && !evt.target.closest('.error__inner')) {
+  if (!evt.target.closest('.success__inner') && !evt.target.closest('.error__inner')) {
     closeResultWindow();
-    document.removeEventListener('keydown', onEscKeyDown);
   }
+  document.removeEventListener('keydown', onEscKeyDown);
 };
 
 const showMessage = (message) => {
