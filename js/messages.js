@@ -2,6 +2,7 @@ import { isEscKeyDown } from './util.js';
 import { onCloseFromChange } from './form-picture.js';
 import { uploadData } from './fetch.js';
 
+
 const errorMessage = document.querySelector('#error').content.querySelector('.error');
 const successMessage = document.querySelector('#success').content.querySelector('.success');
 const formUpload = document.querySelector('.img-upload__form');
@@ -47,9 +48,8 @@ const showErrorMessage = () => {
   document.addEventListener('keydown', (evt) => {
     if (isEscKeyDown(evt)) {
       messageFragment.remove();
-
       document.querySelector('.img-upload__overlay').classList.remove('hidden');
-
+      document.body.classList.add('modal-open');
       document.removeEventListener('keydown', onEscKeyDown);
     }
   });
@@ -63,11 +63,11 @@ const showSuccessMessage = () => {
 
   successButton.addEventListener('click', () => {
     closeResultWindow();
+    onCloseFromChange();
   });
 };
 
 const onSuccess = () => {
-  onCloseFromChange();
   showSuccessMessage();
 };
 
@@ -77,7 +77,17 @@ const onError = () => {
 
 const onUploadSubmit = (evt) => {
   evt.preventDefault();
-  uploadData(onSuccess, onError, 'POST', new FormData(evt.target));
+
+  const submitButton = document.querySelector('.img-upload__submit');
+  submitButton.setAttribute('disabled', 'disabled');
+
+  uploadData(() => {
+    onSuccess();
+    submitButton.removeAttribute('disabled');
+  }, () => {
+    onError();
+    submitButton.removeAttribute('disabled');
+  }, 'POST', new FormData(evt.target));
 };
 
 formUpload.addEventListener('submit', onUploadSubmit);
