@@ -6,12 +6,12 @@ import './filters-button.js';
 import './push-photos.js';
 
 
-let picture = [];
+let pictures = [];
 
 
 const onSuccess = (data) => {
-  picture = data.slice();
-  renderMiniature(picture);
+  pictures = data.slice();
+  renderMiniature(pictures);
   document.querySelector('.img-filters').classList.remove('img-filters--inactive');
 };
 
@@ -36,4 +36,4 @@ const onError = () => {
 loadData(onSuccess, onError);
 
 
-export { picture };
+export { pictures };

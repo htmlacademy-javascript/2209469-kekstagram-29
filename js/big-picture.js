@@ -1,4 +1,4 @@
-import { onEscKeyDown } from './util.js';
+import { isEscKeyDown } from './util.js';
 
 const COMMENTS_STEP = 5;
 
@@ -80,7 +80,7 @@ const onCloseBigPictureClick = () => {
 
 
 const onPopupEscKeyDown = (evt) => {
-  if (onEscKeyDown (evt) &&
+  if (isEscKeyDown (evt) &&
   !evt.target.classList.contains('social__footer-text')
   ) {
     document.removeEventListener('keydown', onPopupEscKeyDown);

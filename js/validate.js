@@ -13,20 +13,20 @@ const ErrorMassage = {
   INVALID_FIRST_SYMBOL: 'хэш-тег начинается с символа # (решётка)',
   INVALID_REPEAT: 'хэш-теги не должны повторяться',
   INVALID_SEPARATOR: 'хэш-теги разделяются пробелами',
-  INVALID_VALUE: 'хэш-тег содержит недопустимые символы'
+  INVALID_VALUE: 'хэш-тег содержит недопустимые символы',
 };
 
 
 const formElement = document.querySelector('.img-upload__form');
 const hashtagInputElement = formElement.querySelector('.text__hashtags');
-const submitBtnElement = formElement.querySelector('.img-upload__submit');
+const submitButtonElement = formElement.querySelector('.img-upload__submit');
 
 
 let errorAlert = '';
-const error = () => errorAlert;
+const err = () => errorAlert;
 
 
-const hashtagValidator = (inputValue) => {
+const hashtagValidated = (inputValue) => {
   errorAlert = '';
 
 
@@ -66,7 +66,7 @@ const hashtagValidator = (inputValue) => {
     },
 
     {
-      check: inputArray.langth > MAX_HASHTAG,
+      check: inputArray.length > MAX_HASHTAG,
       error: ErrorMassage.INVALID_QUANTITY,
     },
 
@@ -97,22 +97,23 @@ const pristine = new Pristine(formElement, {
 });
 
 
-pristine.addValidator(hashtagInputElement, hashtagValidator, error, 2, false);
+pristine.addValidator(hashtagInputElement, hashtagValidated, err, 2, false);
 
 
 const onHashtagInput = () => {
   if (pristine.validate()) {
-    submitBtnElement.disabled = false;
+    submitButtonElement.disabled = false;
   } else {
-    submitBtnElement.disabled = true;
+    submitButtonElement.disabled = true;
   }
 };
 
 
 hashtagInputElement.addEventListener('input', onHashtagInput);
 
+
 const onFormSubmit = () => {
-  submitBtnElement.addEventListener('click', (evt) => {
+  submitButtonElement.addEventListener('click', (evt) => {
     evt.preventDefault();
     onCloseFromChange();
   });

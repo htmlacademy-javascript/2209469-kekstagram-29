@@ -1,4 +1,4 @@
-import { onEscKeyDown } from './util.js';
+import { isEscKeyDown } from './util.js';
 import { onCloseFromChange } from './form-picture.js';
 import { uploadData } from './fetch.js';
 
@@ -13,10 +13,10 @@ const closeResultWindow = () => {
   }
 };
 
-const onEscKeydown = (evt) => {
-  if (onEscKeyDown(evt)) {
+const onEscKeyDown = (evt) => {
+  if (isEscKeyDown(evt)) {
     closeResultWindow();
-    document.removeEventListener('keydown', onEscKeydown);
+    document.removeEventListener('keydown', onEscKeyDown);
   }
 };
 
@@ -24,14 +24,14 @@ const onPopupClick = (evt) => {
   const popup = document.querySelector('.error') || document.querySelector('.success');
   if (popup && !evt.target.closest('.success__inner') && !evt.target.closest('.error__inner')) {
     closeResultWindow();
-    document.removeEventListener('keydown', onEscKeydown);
+    document.removeEventListener('keydown', onEscKeyDown);
   }
 };
 
 const showMessage = (message) => {
   message.addEventListener('click', onPopupClick);
-  document.addEventListener('keydown', onEscKeydown);
   document.body.appendChild(message);
+  document.addEventListener('keydown', onEscKeyDown);
 };
 
 const showErrorMessage = () => {
@@ -42,6 +42,16 @@ const showErrorMessage = () => {
 
   errorButton.addEventListener('click', () => {
     closeResultWindow();
+  });
+
+  document.addEventListener('keydown', (evt) => {
+    if (isEscKeyDown(evt)) {
+      messageFragment.remove();
+
+      document.querySelector('.img-upload__overlay').classList.remove('hidden');
+
+      document.removeEventListener('keydown', onEscKeyDown);
+    }
   });
 };
 

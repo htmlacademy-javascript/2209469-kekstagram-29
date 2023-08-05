@@ -5,7 +5,7 @@ const Keys = {
   ESC: 'Esc'
 };
 
-const onEscKeyDown = (evt) => evt.key === Keys.ESCAPE || evt.key === Keys.ESC;
+const isEscKeyDown = (evt) => evt.key === Keys.ESCAPE || evt.key === Keys.ESC;
 
 const normalizeString = (str) => str.toLowerCase().trim();
 
@@ -29,7 +29,7 @@ const shuffleArray = (array) => {
   return array;
 };
 
-export { onEscKeyDown };
+export { isEscKeyDown };
 export { normalizeString };
 export { debounce };
 export { shuffleArray };
