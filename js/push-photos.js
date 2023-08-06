@@ -18,7 +18,7 @@ uploadFile.addEventListener('change', () => {
     reader.addEventListener('load', () => {
       preview.src = reader.result;
       images.forEach((evt) => {
-        evt.style.backgroundImage = `url(${reader.result})`;
+        evt.style.backgroundImage = `url(${URL.createObjectURL(file)})`;
       });
     });
 

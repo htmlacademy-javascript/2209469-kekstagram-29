@@ -1,4 +1,4 @@
-import { pristine } from './validate.js';
+import { resetPristine } from './validate.js';
 import { isEscKeyDown } from './util.js';
 import { resetScale } from './scale.js';
 import { resetSlider } from './effects.js';
@@ -18,7 +18,7 @@ const onCloseFromChange = () => {
   uploadCancelElement.removeEventListener('click', onCloseFromChange);
   submitButtonElement.disabled = false;
   formUpladElement.reset();
-  pristine.reset();
+  resetPristine();
   resetScale();
   resetSlider();
 };

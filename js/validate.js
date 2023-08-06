@@ -6,7 +6,7 @@ const MAX_HASHTAG = 5;
 const MAX_HASHTAG_LENGTH = 20;
 
 
-const ErrorMassage = {
+const ErrorMessage = {
   INVALID_DESCRIPION_LENGTH: `вы ввели максимальное допустимое количество символов - ${MAX_DESCRIPTION_LENGTH}`,
   INVALID_QUANTITY: `нельзя указать больше ${MAX_HASHTAG} хэш-тегов`,
   INVALID_HASHTAG_LENGTH: `максимальная длина одного хэш-тега ${MAX_HASHTAG_LENGTH} символов, включая решётку`,
@@ -19,11 +19,22 @@ const ErrorMassage = {
 
 const formElement = document.querySelector('.img-upload__form');
 const hashtagInputElement = formElement.querySelector('.text__hashtags');
+const descriptionInputElement = formElement.querySelector('.text__description');
 const submitButtonElement = formElement.querySelector('.img-upload__submit');
 
 
 let errorAlert = '';
 const err = () => errorAlert;
+
+
+const commentValidated = (inputValue) => {
+  const normalizedText = normalizeString(inputValue);
+
+  if (normalizedText.length <= MAX_DESCRIPTION_LENGTH) {
+    return true;
+  }
+  return false;
+};
 
 
 const hashtagValidated = (inputValue) => {
@@ -47,32 +58,32 @@ const hashtagValidated = (inputValue) => {
   const rules = [
     {
       check: inputArray.some((hashtag) => hashtag.indexOf('#', 1) >= 1),
-      error: ErrorMassage.INVALID_SEPARATOR,
+      error: ErrorMessage.INVALID_SEPARATOR,
     },
 
     {
       check: inputArray.some((hashtag) => hashtag[0] !== '#'),
-      error: ErrorMassage.INVALID_FIRST_SYMBOL,
+      error: ErrorMessage.INVALID_FIRST_SYMBOL,
     },
 
     {
       check: inputArray.some((hashtag, _, array) => array.indexOf(hashtag) !== array.lastIndexOf(hashtag)),
-      error: ErrorMassage.INVALID_REPEAT,
+      error: ErrorMessage.INVALID_REPEAT,
     },
 
     {
       check: inputArray.some((hashtag) => hashtag.length > MAX_HASHTAG_LENGTH),
-      error: ErrorMassage.INVALID_HASHTAG_LENGTH,
+      error: ErrorMessage.INVALID_HASHTAG_LENGTH,
     },
 
     {
       check: inputArray.length > MAX_HASHTAG,
-      error: ErrorMassage.INVALID_QUANTITY,
+      error: ErrorMessage.INVALID_QUANTITY,
     },
 
     {
       check: inputArray.some((hashtag) => !/^#[a-zа-яё0-9]{1,19}$/i.test(hashtag)),
-      error: ErrorMassage.INVALID_VALUE,
+      error: ErrorMessage.INVALID_VALUE,
     },
   ];
 
@@ -95,6 +106,7 @@ const pristine = new Pristine(formElement, {
 
 
 pristine.addValidator(hashtagInputElement, hashtagValidated, err, 2, false);
+pristine.addValidator(descriptionInputElement, commentValidated, ErrorMessage.INVALID_DESCRIPION_LENGTH);
 
 
 const onHashtagInput = () => {
@@ -105,8 +117,8 @@ const onHashtagInput = () => {
   }
 };
 
-
 hashtagInputElement.addEventListener('input', onHashtagInput);
+descriptionInputElement.addEventListener('input', onHashtagInput);
 
 
 const onFormSubmit = () => {
@@ -116,4 +128,6 @@ const onFormSubmit = () => {
   });
 };
 
-export { onFormSubmit, pristine };
+const resetPristine = () => pristine.reset();
+
+export { onFormSubmit, resetPristine };
