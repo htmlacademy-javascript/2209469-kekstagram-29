@@ -1,47 +1,57 @@
-import { pristine } from './validate.js';
-import { onEscKeyDown } from './util.js';
+import { resetPristine } from './validate.js';
+import { isEscKeyDown } from './util.js';
 import { resetScale } from './scale.js';
 import { resetSlider } from './effects.js';
 
 
-const upload = document.querySelector('.img-upload');
-const fileUpload = upload.querySelector('#upload-file');
-const formUplad = upload.querySelector('.img-upload__form');
-const overlayUpload = upload.querySelector('.img-upload__overlay');
-const uploadCancel = upload.querySelector('#upload-cancel');
-const submitBtnElement = upload.querySelector('.img-upload__submit');
+const uploadElement = document.querySelector('.img-upload');
+const fileUploadElement = uploadElement.querySelector('#upload-file');
+const formUpladElement = uploadElement.querySelector('.img-upload__form');
+const overlayUploadElement = uploadElement.querySelector('.img-upload__overlay');
+const uploadCancelElement = uploadElement.querySelector('#upload-cancel');
+const submitButtonElement = uploadElement.querySelector('.img-upload__submit');
+const textHashtags = uploadElement.querySelector('.text__hashtags');
+const textDescription = uploadElement.querySelector('.text__description');
 
 const onCloseFromChange = () => {
-  overlayUpload.classList.add('hidden');
-  document.body.classList.remove('mdoal-open');
-  document.removeEventListener('keydown', onFormEscKeyDown);
-  uploadCancel.removeEventListener('click', onCloseFromChange);
-  submitBtnElement.disabled = false;
-  formUplad.reset();
-  pristine.reset();
   resetScale();
+  formUpladElement.reset();
+  resetPristine();
   resetSlider();
+  submitButtonElement.disabled = true;
+  overlayUploadElement.classList.add('hidden');
+  document.body.classList.remove('modal-open');
 };
 
 
-function onFormEscKeyDown(evt) {
-  if (onEscKeyDown (evt) &&
-  !evt.target.classList.contains('text__hashtags') &&
-  !evt.target.classList.contains('text__description')
-  ) {
+const onFormEscKeyDown = (evt) => {
+  if (isEscKeyDown(evt)) {
+    evt.preventDefault();
     onCloseFromChange();
     document.removeEventListener('keydown', onFormEscKeyDown);
   }
-}
+};
+
+uploadCancelElement.addEventListener('click', onCloseFromChange);
 
 
 const onOpenFormChange = () => {
-  overlayUpload.classList.remove('hidden');
+  overlayUploadElement.classList.remove('hidden');
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', onFormEscKeyDown);
-  uploadCancel.addEventListener('click', onCloseFromChange);
 };
 
-fileUpload.addEventListener('change', onOpenFormChange);
+fileUploadElement.addEventListener('change', onOpenFormChange);
+
+
+const onKeyStopListener = (evt) => {
+  if (isEscKeyDown(evt)) {
+    evt.stopPropagation();
+  }
+};
+
+textHashtags.addEventListener('keydown', onKeyStopListener);
+textDescription.addEventListener('keydown', onKeyStopListener);
+
 
 export { onCloseFromChange };

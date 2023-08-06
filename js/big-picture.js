@@ -1,6 +1,8 @@
-import { onEscKeyDown } from './util.js';
+import { isEscKeyDown } from './util.js';
+
 
 const COMMENTS_STEP = 5;
+
 
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureImg = bigPicture.querySelector('.big-picture__img img');
@@ -80,7 +82,7 @@ const onCloseBigPictureClick = () => {
 
 
 const onPopupEscKeyDown = (evt) => {
-  if (onEscKeyDown (evt) &&
+  if (isEscKeyDown (evt) &&
   !evt.target.classList.contains('social__footer-text')
   ) {
     document.removeEventListener('keydown', onPopupEscKeyDown);

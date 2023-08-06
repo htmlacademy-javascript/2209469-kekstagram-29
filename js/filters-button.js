@@ -1,4 +1,4 @@
-import { picture } from './main.js';
+import { pictures } from './main.js';
 import { renderMiniature, removeMiniature } from './miniatures.js';
 import { debounce, shuffleArray } from './util.js';
 
@@ -10,9 +10,9 @@ const filtersForm = document.querySelector('.img-filters');
 const filtersButton = filtersForm.querySelector('.img-filters__form');
 
 const Filters = {
-  'filter-default': () => picture.slice(),
-  'filter-random': () => shuffleArray(picture.slice()).slice(0, NUMBER_RANDOM_FILTER),
-  'filter-discussed': () => picture.slice().sort((firstPicture, secondPicture) =>
+  'filter-default': () => pictures.slice(),
+  'filter-random': () => shuffleArray(pictures.slice()).slice(0, NUMBER_RANDOM_FILTER),
+  'filter-discussed': () => pictures.slice().sort((firstPicture, secondPicture) =>
     secondPicture.comments.length - firstPicture.comments.length),
 };
 
