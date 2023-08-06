@@ -1,6 +1,8 @@
 import { isEscKeyDown } from './util.js';
 
+
 const COMMENTS_STEP = 5;
+
 
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureImg = bigPicture.querySelector('.big-picture__img img');
