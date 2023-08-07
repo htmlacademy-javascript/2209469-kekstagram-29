@@ -1,13 +1,13 @@
 import { showBigPicture } from './big-picture.js';
 
 
-const miniatureTemplate = document.querySelector('#picture').content.querySelector('.picture');
-const miniaturesCountainer = document.querySelector('.pictures');
+const miniatureTemplateElement = document.querySelector('#picture').content.querySelector('.picture');
+const miniaturesCountainerElement = document.querySelector('.pictures');
 
 
 const createMiniature = (picture) => {
   const { url, description, likes, comments } = picture;
-  const miniatureElement = miniatureTemplate.cloneNode(true);
+  const miniatureElement = miniatureTemplateElement.cloneNode(true);
 
   miniatureElement.querySelector('.picture__img').src = url;
   miniatureElement.querySelector('.picture__img').alt = description;
@@ -31,7 +31,7 @@ const renderMiniature = (pictures) => {
     fragment.append(createMiniature(item));
   });
 
-  miniaturesCountainer.appendChild(fragment);
+  miniaturesCountainerElement.appendChild(fragment);
 };
 
 const removeMiniature = () => {

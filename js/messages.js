@@ -40,18 +40,22 @@ const showErrorMessage = () => {
 
   showMessage(messageFragment);
 
-  errorButton.addEventListener('click', () => {
-    document.querySelector('.img-upload__overlay').classList.remove('hidden');
-    closeResultWindow();
-  });
-
-  document.addEventListener('keydown', (evt) => {
+  const onErrorEscKeyDown = (evt) => {
     if (isEscKeyDown(evt)) {
-      messageFragment.remove();
       document.querySelector('.img-upload__overlay').classList.remove('hidden');
       document.body.classList.add('modal-open');
       document.removeEventListener('keydown', onEscKeyDown);
+      document.removeEventListener('keydown', onErrorEscKeyDown);
     }
+  };
+  document.addEventListener('keydown', onErrorEscKeyDown);
+
+
+  errorButton.addEventListener('click', () => {
+    document.querySelector('.img-upload__overlay').classList.remove('hidden');
+    document.removeEventListener('keydown', onEscKeyDown);
+    document.removeEventListener('keydown', onErrorEscKeyDown);
+    closeResultWindow();
   });
 };
 
@@ -80,14 +84,14 @@ const onUploadSubmit = (evt) => {
   evt.preventDefault();
 
   const submitButton = document.querySelector('.img-upload__submit');
-  submitButton.setAttribute('disabled', 'disabled');
+  submitButton.disabled = true;
 
   uploadData(() => {
     onSuccess();
-    submitButton.removeAttribute('disabled');
+    submitButton.disabled = false;
   }, () => {
     onError();
-    submitButton.removeAttribute('disabled');
+    submitButton.disabled = false;
   }, 'POST', new FormData(evt.target));
 };
 
