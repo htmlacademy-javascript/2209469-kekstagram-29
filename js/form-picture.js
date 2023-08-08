@@ -10,22 +10,22 @@ const formUpladElement = uploadElement.querySelector('.img-upload__form');
 const overlayUploadElement = uploadElement.querySelector('.img-upload__overlay');
 const uploadCancelElement = uploadElement.querySelector('#upload-cancel');
 const submitButtonElement = uploadElement.querySelector('.img-upload__submit');
-const textHashtags = uploadElement.querySelector('.text__hashtags');
-const textDescription = uploadElement.querySelector('.text__description');
+const textHashtagsElement = uploadElement.querySelector('.text__hashtags');
+const textDescriptionElement = uploadElement.querySelector('.text__description');
+
 
 const onCloseFromChange = () => {
   resetScale();
   formUpladElement.reset();
   resetPristine();
   resetSlider();
-  submitButtonElement.disabled = true;
   overlayUploadElement.classList.add('hidden');
   document.body.classList.remove('modal-open');
 };
 
 
 const onFormEscKeyDown = (evt) => {
-  if (isEscKeyDown(evt)) {
+  if (isEscKeyDown(evt) && !document.querySelector('.error')) {
     evt.preventDefault();
     onCloseFromChange();
     document.removeEventListener('keydown', onFormEscKeyDown);
@@ -39,6 +39,7 @@ const onOpenFormChange = () => {
   overlayUploadElement.classList.remove('hidden');
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', onFormEscKeyDown);
+  submitButtonElement.disabled = false;
 };
 
 fileUploadElement.addEventListener('change', onOpenFormChange);
@@ -50,8 +51,8 @@ const onKeyStopListener = (evt) => {
   }
 };
 
-textHashtags.addEventListener('keydown', onKeyStopListener);
-textDescription.addEventListener('keydown', onKeyStopListener);
+textHashtagsElement.addEventListener('keydown', onKeyStopListener);
+textDescriptionElement.addEventListener('keydown', onKeyStopListener);
 
 
 export { onCloseFromChange };
